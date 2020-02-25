@@ -1,0 +1,22 @@
+{
+    "name": "marian/bees",
+    "require": {
+        "phpunit/phpunit": "^9.0",
+        "ext-readline": "*"
+    },
+    "authors": [
+        {
+            "name": "Marian Czerniejewski",
+            "email": "marian@czerniejewski.pl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hive\\": "src/Hive",
+            "Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "tests": "./vendor/bin/phpunit tests"
+    }
+}
