@@ -19,7 +19,7 @@
     },
     "scripts": {
         "tests": "./vendor/bin/phpunit tests",
-        "static": "./vendor/bin/phpstan analyse src tests",
+        "static": "./vendor/bin/phpstan analyse src tests --level 8",
         "cs-fixer": "./vendor/bin/php-cs-fixer fix --diff"
     },
     "require-dev": {

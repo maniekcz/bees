@@ -7,6 +7,7 @@ use Hive\Model\Drone;
 use Hive\Model\Hive;
 use Hive\Model\Queen;
 use Hive\Model\Worker;
+use Hive\Service\RandomShuffler;
 
 class HiveBuilder implements HivePlan
 {
@@ -15,7 +16,7 @@ class HiveBuilder implements HivePlan
 
     public function createHive(): void
     {
-        $this->hive = Hive::create();
+        $this->hive = Hive::create(new RandomShuffler());
     }
 
     public function addQueen(): void
@@ -44,6 +45,9 @@ class HiveBuilder implements HivePlan
         $this->hive->addBee(Drone::create());
     }
 
+    /**
+     * @return Hive
+     */
     public function hive(): Hive
     {
         return $this->hive;

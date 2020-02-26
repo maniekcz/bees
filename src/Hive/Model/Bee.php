@@ -59,8 +59,8 @@ abstract class Bee
      */
     public function name(): string
     {
-        $path = explode('\\', __CLASS__);
-        return array_pop($path);
+        $path = explode('\\', static::class);
+        return array_pop($path) ?? '';
     }
 
     /**

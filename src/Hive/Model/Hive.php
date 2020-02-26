@@ -4,22 +4,29 @@ declare(strict_types=1);
 namespace Hive\Model;
 
 use Hive\Exception\HiveEmpty;
+use Hive\Service\Shuffler;
 
 class Hive
 {
-    /** @var array  */
+    /** @var array|Bee[] */
     private $bees;
 
-    private function __construct()
+    /** @var Shuffler */
+    private $shuffler;
+
+    private function __construct(Shuffler $shuffler)
     {
         $this->bees = [];
+        $this->shuffler = $shuffler;
     }
+
     /**
-     * @return static
+     * @param Shuffler $shuffler
+     * @return self
      */
-    public static function create(): self
+    public static function create(Shuffler $shuffler): self
     {
-        return new self();
+        return new self($shuffler);
     }
 
     public function addBee(Bee $bee): void
@@ -29,35 +36,17 @@ class Hive
 
     public function lifespan(): int
     {
-        return array_reduce($this->bees, static function (int $lifespan, Bee $bee) {
+        return (int) array_reduce($this->bees, static function (int $lifespan, Bee $bee) {
             return $lifespan + $bee->lifespan();
         }, 0);
     }
 
     /**
+     * @return Bee
      * @throws HiveEmpty
      */
     public function draw(): Bee
     {
-        return $this->bees[array_rand(
-            $this->lifeBees()
-        )];
-    }
-
-    /**
-     * @return array|Bee[]
-     * @throws HiveEmpty
-     */
-    private function lifeBees(): array
-    {
-        $bees = array_filter($this->bees, static function (Bee $bee) {
-            return !$bee->isDead();
-        });
-
-        if (empty($bees)) {
-            throw new HiveEmpty();
-        }
-
-        return $bees;
+        return $this->shuffler->shuffle($this->bees);
     }
 }

@@ -59,4 +59,12 @@ class QueenTest extends TestCase
         $this->expectException(BeeAlreadyDead::class);
         $this->bee->hit();
     }
+
+    /**
+     * @test
+     */
+    public function can_get_correct_name(): void
+    {
+        $this->assertEquals('Queen', $this->bee->name());
+    }
 }

@@ -33,11 +33,22 @@ class Game
         $hive = $this->repository->get();
         try {
             $bee = $hive->draw();
+        } catch (HiveEmpty $exception) {
+            $this->logger->info(
+                sprintf('Left %s hints', $hive->lifespan())
+            );
+            throw new GameOverException();
+        }
+
+        try {
             $bee->hit();
             $this->logger->info(
-                sprintf('Direct Hit. You took %s hit points from a %s bee' . PHP_EOL, $bee->damage(), $bee->name())
+                sprintf('Direct Hit. You took %s hit points from a %s bee', $bee->damage(), $bee->name())
             );
-        } catch (HiveEmpty|QueenDied $exception) {
+        } catch (QueenDied $exception) {
+            $this->logger->info(
+                sprintf('Direct Hit. You took %s hit points from a %s bee', $bee->damage(), $bee->name())
+            );
             $this->logger->info(
                 sprintf('Left %s hints', $hive->lifespan())
             );
