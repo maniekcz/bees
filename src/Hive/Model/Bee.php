@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace Hive\Model;
 
 use Hive\Exception\BeeAlreadyDead;
-use Hive\Service\Hits;
 
 abstract class Bee
 {
@@ -14,18 +13,10 @@ abstract class Bee
     /** @var int */
     protected $damage;
 
-    /** @var Hits */
-    private $hit;
-
-    /** @var bool */
-    protected $dead;
-
-    public function __construct(int $lifespan, int $power, Hits $hit)
+    public function __construct(int $lifespan, int $power)
     {
         $this->lifespan = $lifespan;
         $this->damage = $power;
-        $this->hit = $hit;
-        $this->dead = false;
     }
 
     /**
@@ -37,10 +28,12 @@ abstract class Bee
             throw new BeeAlreadyDead();
         }
 
-        $this->lifespan = $this->hit->hit($this->lifespan, $this->damage);
-        if(0 === $this->lifespan) {
-            $this->dead = true;
+        $this->lifespan -= static::DAMAGE;
+
+        if(1 > $this->lifespan) {
+            $this->lifespan = 0;
         }
+
     }
 
     /**
@@ -56,6 +49,23 @@ abstract class Bee
      */
     public function isDead(): bool
     {
-        return $this->dead;
+        return 0 === $this->lifespan;
+    }
+
+    /**
+     * @return string
+     */
+    public function name(): string
+    {
+        $path = explode('\\', __CLASS__);
+        return array_pop($path);
+    }
+
+    /**
+     * @return int
+     */
+    public function damage(): int
+    {
+        return static::DAMAGE;
     }
 }

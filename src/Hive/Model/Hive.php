@@ -34,6 +34,9 @@ class Hive
         }, 0);
     }
 
+    /**
+     * @throws HiveEmpty
+     */
     public function draw(): Bee
     {
         return $this->bees[array_rand(

@@ -8,11 +8,11 @@ use Hive\Model\Hive;
 class HiveDirector
 {
     /**
-     * @var Builders
+     * @var HivePlan
      */
     private $builders;
 
-    public function __construct(Builders $builders)
+    public function __construct(HivePlan $builders)
     {
         $this->builders = $builders;
     }

@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Hive\Model;
 
-use Hive\Service\Hits;
-
 class Drone extends Bee
 {
     /** @var int  */
@@ -14,11 +12,10 @@ class Drone extends Bee
     public const DAMAGE = 12;
 
     /**
-     * @param Hits $hit
      * @return Drone
      */
-    public static function create(Hits $hit): Drone
+    public static function create(): Drone
     {
-        return new static(static::LIFESPAN, static::DAMAGE, $hit);
+        return new static(static::LIFESPAN, static::DAMAGE);
     }
 }

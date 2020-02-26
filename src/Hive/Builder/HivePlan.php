@@ -5,7 +5,7 @@ namespace Hive\Builder;
 
 use Hive\Model\Hive;
 
-interface Builders
+interface HivePlan
 {
     public function createHive(): void;
     public function addQueen(): void;

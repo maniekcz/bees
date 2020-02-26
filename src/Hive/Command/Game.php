@@ -3,23 +3,25 @@ declare(strict_types=1);
 
 namespace Hive\Command;
 
-use Hive\Builder\HiveDirector;
-use Hive\Builder\HiveBuilder;
 use Hive\Exception\BeeAlreadyDead;
 use Hive\Exception\GameOverException;
-use Hive\Service\GameRules;
-use Hive\Service\Rules;
+use Hive\Exception\HiveEmpty;
+use Hive\Exception\QueenDied;
+use Hive\Repository\HiveRepository;
+use Psr\Log\LoggerInterface;
 
 class Game
 {
-    /** @var Rules */
-    private $rule;
+    /** @var HiveRepository */
+    private $repository;
 
-    public function __construct()
+    /** @var LoggerInterface */
+    private $logger;
+
+    public function __construct(HiveRepository $repository, LoggerInterface $logger)
     {
-        $this->rule = GameRules::create(
-            (new HiveDirector(new HiveBuilder()))->build()
-        );
+        $this->repository = $repository;
+        $this->logger = $logger;
     }
 
     /**
@@ -28,6 +30,18 @@ class Game
      */
     public function run(): void
     {
-         $this->rule->play();
+        $hive = $this->repository->get();
+        try {
+            $bee = $hive->draw();
+            $bee->hit();
+            $this->logger->info(
+                sprintf('Direct Hit. You took %s hit points from a %s bee' . PHP_EOL, $bee->damage(), $bee->name())
+            );
+        } catch(HiveEmpty|QueenDied $exception) {
+            $this->logger->info(
+                sprintf('Left %s hints', $hive->lifespan())
+            );
+            throw new GameOverException();
+        }
     }
 }

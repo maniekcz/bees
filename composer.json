@@ -1,8 +1,10 @@
 {
     "name": "marian/bees",
     "require": {
+        "php": "^7.3",
         "phpunit/phpunit": "^9.0",
-        "ext-readline": "*"
+        "ext-readline": "*",
+        "psr/log": "^1.1"
     },
     "authors": [
         {

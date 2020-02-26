@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Hive\Model;
 
-use Hive\Service\Hits;
+use Hive\Exception\BeeAlreadyDead;
+use Hive\Exception\QueenDied;
 
 class Queen extends Bee
 {
@@ -14,11 +15,22 @@ class Queen extends Bee
     public const DAMAGE = 8;
 
     /**
-     * @param Hits $hit
      * @return Queen
      */
-    public static function create(Hits $hit): Queen
+    public static function create(): Queen
     {
-        return new static(static::LIFESPAN, static::DAMAGE, $hit);
+        return new static(static::LIFESPAN, static::DAMAGE);
+    }
+
+    /**
+     * @throws QueenDied
+     * @throws BeeAlreadyDead
+     */
+    public function hit(): void
+    {
+        parent::hit();
+        if(1 > $this->lifespan) {
+            throw new QueenDied();
+        }
     }
 }

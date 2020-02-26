@@ -6,7 +6,6 @@ namespace Tests\Hive\Model;
 use Hive\Exception\BeeAlreadyDead;
 use Hive\Exception\QueenDied;
 use Hive\Model\Queen;
-use Hive\Service\SpecialHit;
 use PHPUnit\Framework\TestCase;
 use Tests\ReflectionTrait;
 
@@ -19,7 +18,7 @@ class QueenTest extends TestCase
 
     public function setUp(): void
     {
-        $this->bee = Queen::create(new SpecialHit());
+        $this->bee = Queen::create();
     }
 
     /**

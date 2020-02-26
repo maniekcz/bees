@@ -5,7 +5,6 @@ namespace Tests\Hive\Model;
 
 use Hive\Exception\BeeAlreadyDead;
 use Hive\Model\Drone;
-use Hive\Service\RegularHit;
 use PHPUnit\Framework\TestCase;
 use Tests\ReflectionTrait;
 
@@ -18,7 +17,7 @@ class DroneTest extends TestCase
 
     public function setUp(): void
     {
-        $this->bee = Drone::create(new RegularHit());
+        $this->bee = Drone::create();
     }
 
     /**

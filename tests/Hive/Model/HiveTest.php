@@ -9,7 +9,6 @@ use Hive\Exception\HiveEmpty;
 use Hive\Model\Bee;
 use Hive\Model\Drone;
 use Hive\Model\Hive;
-use Hive\Service\RegularHit;
 use PHPUnit\Framework\TestCase;
 use Tests\ReflectionTrait;
 
@@ -50,7 +49,7 @@ class HiveTest extends TestCase
     public function can_add_new_bee(): void
     {
         $count = \count($this->getPrivateProperty($this->hive, 'bees'));
-        $this->hive->addBee(Drone::create(new RegularHit()));
+        $this->hive->addBee(Drone::create());
         $this->assertEquals(++$count, \count($this->getPrivateProperty($this->hive, 'bees')));
     }
 

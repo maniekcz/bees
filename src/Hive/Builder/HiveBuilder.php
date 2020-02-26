@@ -7,10 +7,8 @@ use Hive\Model\Drone;
 use Hive\Model\Hive;
 use Hive\Model\Queen;
 use Hive\Model\Worker;
-use Hive\Service\RegularHit;
-use Hive\Service\SpecialHit;
 
-class HiveBuilder implements Builders
+class HiveBuilder implements HivePlan
 {
     /** @var Hive */
     private $hive;
@@ -22,28 +20,28 @@ class HiveBuilder implements Builders
 
     public function addQueen(): void
     {
-        $this->hive->addBee(Queen::create(new SpecialHit()));
+        $this->hive->addBee(Queen::create());
     }
 
     public function addWorker(): void
     {
-        $this->hive->addBee(Worker::create(new RegularHit()));
-        $this->hive->addBee(Worker::create(new RegularHit()));
-        $this->hive->addBee(Worker::create(new RegularHit()));
-        $this->hive->addBee(Worker::create(new RegularHit()));
-        $this->hive->addBee(Worker::create(new RegularHit()));
+        $this->hive->addBee(Worker::create());
+        $this->hive->addBee(Worker::create());
+        $this->hive->addBee(Worker::create());
+        $this->hive->addBee(Worker::create());
+        $this->hive->addBee(Worker::create());
     }
 
     public function addDrone(): void
     {
-        $this->hive->addBee(Drone::create(new RegularHit()));
-        $this->hive->addBee(Drone::create(new RegularHit()));
-        $this->hive->addBee(Drone::create(new RegularHit()));
-        $this->hive->addBee(Drone::create(new RegularHit()));
-        $this->hive->addBee(Drone::create(new RegularHit()));
-        $this->hive->addBee(Drone::create(new RegularHit()));
-        $this->hive->addBee(Drone::create(new RegularHit()));
-        $this->hive->addBee(Drone::create(new RegularHit()));
+        $this->hive->addBee(Drone::create());
+        $this->hive->addBee(Drone::create());
+        $this->hive->addBee(Drone::create());
+        $this->hive->addBee(Drone::create());
+        $this->hive->addBee(Drone::create());
+        $this->hive->addBee(Drone::create());
+        $this->hive->addBee(Drone::create());
+        $this->hive->addBee(Drone::create());
     }
 
     public function hive(): Hive
