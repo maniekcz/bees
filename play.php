@@ -14,14 +14,14 @@ $game = new Game(
     new PrintLogger()
 );
 
-while(true) {
+while (true) {
     $line = readline();
     if ('hit' === $line) {
         try {
             $game->run();
         } catch (GameOverException $exception) {
             die();
-        } catch (\Exception $exception)  {
+        } catch (\Exception $exception) {
             die('An error occurred, please try again later.');
         }
     } else {

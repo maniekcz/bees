@@ -5,5 +5,4 @@ namespace Hive\Exception;
 
 class HiveEmpty extends \Exception
 {
-
 }

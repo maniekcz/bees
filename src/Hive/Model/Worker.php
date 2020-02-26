@@ -16,6 +16,6 @@ class Worker extends Bee
      */
     public static function create(): Worker
     {
-        return new static(static::LIFESPAN, static::DAMAGE);
+        return new self(static::LIFESPAN, static::DAMAGE);
     }
 }

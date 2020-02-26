@@ -19,6 +19,12 @@
         }
     },
     "scripts": {
-        "tests": "./vendor/bin/phpunit tests"
+        "tests": "./vendor/bin/phpunit tests",
+        "static": "./vendor/bin/phpstan analyse src tests",
+        "cs-fixer": "./vendor/bin/php-cs-fixer fix --diff"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.11",
+        "friendsofphp/php-cs-fixer": "^2.16"
     }
 }

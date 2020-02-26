@@ -16,6 +16,6 @@ class Drone extends Bee
      */
     public static function create(): Drone
     {
-        return new static(static::LIFESPAN, static::DAMAGE);
+        return new self(static::LIFESPAN, static::DAMAGE);
     }
 }

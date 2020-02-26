@@ -5,5 +5,4 @@ namespace Hive\Exception;
 
 class QueenDied extends \Exception
 {
-
 }

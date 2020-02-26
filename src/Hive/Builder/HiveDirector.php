@@ -20,7 +20,8 @@ class HiveDirector
     /**
      * @return Hive
      */
-    public function build(): Hive {
+    public function build(): Hive
+    {
         $this->builders->createHive();
         $this->builders->addDrone();
         $this->builders->addQueen();

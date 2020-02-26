@@ -29,7 +29,7 @@ class Hive
 
     public function lifespan(): int
     {
-        return array_reduce($this->bees, static function(int $lifespan, Bee $bee) {
+        return array_reduce($this->bees, static function (int $lifespan, Bee $bee) {
             return $lifespan + $bee->lifespan();
         }, 0);
     }
@@ -50,11 +50,11 @@ class Hive
      */
     private function lifeBees(): array
     {
-        $bees = array_filter($this->bees, static function(Bee $bee) {
+        $bees = array_filter($this->bees, static function (Bee $bee) {
             return !$bee->isDead();
         });
 
-        if(empty($bees)) {
+        if (empty($bees)) {
             throw new HiveEmpty();
         }
 

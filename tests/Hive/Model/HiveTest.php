@@ -21,7 +21,7 @@ class HiveTest extends TestCase
 
     public function setUp(): void
     {
-       $this->hive = (new HiveDirector(new HiveBuilder()))->build();
+        $this->hive = (new HiveDirector(new HiveBuilder()))->build();
     }
 
     /**

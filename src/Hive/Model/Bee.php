@@ -7,6 +7,9 @@ use Hive\Exception\BeeAlreadyDead;
 
 abstract class Bee
 {
+    /** @var int  */
+    public const DAMAGE = 12;
+
     /** @var int */
     protected $lifespan;
 
@@ -24,16 +27,15 @@ abstract class Bee
      */
     public function hit(): void
     {
-        if(1 > $this->lifespan) {
+        if (1 > $this->lifespan) {
             throw new BeeAlreadyDead();
         }
 
-        $this->lifespan -= static::DAMAGE;
+        $this->lifespan -= $this->damage();
 
-        if(1 > $this->lifespan) {
+        if (1 > $this->lifespan) {
             $this->lifespan = 0;
         }
-
     }
 
     /**

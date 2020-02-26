@@ -19,7 +19,7 @@ class Queen extends Bee
      */
     public static function create(): Queen
     {
-        return new static(static::LIFESPAN, static::DAMAGE);
+        return new self(static::LIFESPAN, static::DAMAGE);
     }
 
     /**
@@ -29,7 +29,7 @@ class Queen extends Bee
     public function hit(): void
     {
         parent::hit();
-        if(1 > $this->lifespan) {
+        if (1 > $this->lifespan) {
             throw new QueenDied();
         }
     }
