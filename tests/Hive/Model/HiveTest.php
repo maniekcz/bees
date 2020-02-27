@@ -10,7 +10,7 @@ use Hive\Model\Bee;
 use Hive\Model\Drone;
 use Hive\Model\Hive;
 use PHPUnit\Framework\TestCase;
-use Hive\Service\RandomShuffler;
+use Hive\Service\RandomBeeProvider;
 use Tests\ReflectionTrait;
 
 class HiveTest extends TestCase
@@ -78,7 +78,7 @@ class HiveTest extends TestCase
      */
     public function cannot_draw_empty_hive(): void
     {
-        $hive = Hive::create(new RandomShuffler());
+        $hive = Hive::create(new RandomBeeProvider());
         $this->expectException(HiveEmpty::class);
         $hive->draw();
     }

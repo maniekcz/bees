@@ -4,27 +4,27 @@ declare(strict_types=1);
 namespace Hive\Model;
 
 use Hive\Exception\HiveEmpty;
-use Hive\Service\Shuffler;
+use Hive\Service\BeeProvider;
 
 class Hive
 {
     /** @var array|Bee[] */
     private $bees;
 
-    /** @var Shuffler */
+    /** @var BeeProvider */
     private $shuffler;
 
-    private function __construct(Shuffler $shuffler)
+    private function __construct(BeeProvider $shuffler)
     {
         $this->bees = [];
         $this->shuffler = $shuffler;
     }
 
     /**
-     * @param Shuffler $shuffler
+     * @param BeeProvider $shuffler
      * @return self
      */
-    public static function create(Shuffler $shuffler): self
+    public static function create(BeeProvider $shuffler): self
     {
         return new self($shuffler);
     }

@@ -11,8 +11,8 @@ use Hive\Model\Worker;
 use Hive\Repository\InMemoryHiveRepository;
 use Tests\Hive\Service\InMemoryLogger;
 use PHPUnit\Framework\TestCase;
-use Tests\Hive\Service\FirstShuffler;
-use Hive\Service\RandomShuffler;
+use Tests\Hive\Service\FirstBeeProvider;
+use Hive\Service\RandomBeeProvider;
 use Tests\ReflectionTrait;
 
 class GameTest extends TestCase
@@ -30,7 +30,7 @@ class GameTest extends TestCase
 
     public function setUp(): void
     {
-        $this->hive = Hive::create(new RandomShuffler());
+        $this->hive = Hive::create(new RandomBeeProvider());
         $this->logger = new InMemoryLogger();
         $this->game = new Game(
             new InMemoryHiveRepository($this->hive),
@@ -93,7 +93,7 @@ class GameTest extends TestCase
      */
     public function can_display_messages_with_hints_after_queen_die(): void
     {
-        $this->hive = Hive::create(new FirstShuffler());
+        $this->hive = Hive::create(new FirstBeeProvider());
         $this->game = new Game(
             new InMemoryHiveRepository($this->hive),
             $this->logger

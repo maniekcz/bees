@@ -6,7 +6,7 @@ namespace Hive\Service;
 use Hive\Exception\HiveEmpty;
 use Hive\Model\Bee;
 
-class RandomShuffler implements Shuffler
+class RandomBeeProvider implements BeeProvider
 {
     /**
      * @param array $bees

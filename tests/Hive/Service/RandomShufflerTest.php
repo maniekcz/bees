@@ -7,7 +7,7 @@ use Hive\Exception\HiveEmpty;
 use Hive\Model\Bee;
 use Hive\Model\Queen;
 use Hive\Model\Worker;
-use Hive\Service\RandomShuffler;
+use Hive\Service\RandomBeeProvider;
 use PHPUnit\Framework\TestCase;
 use Tests\ReflectionTrait;
 
@@ -20,7 +20,7 @@ class RandomShufflerTest extends TestCase
      */
     public function can_shuffle(): void
     {
-        $shuffler = new RandomShuffler();
+        $shuffler = new RandomBeeProvider();
         $this->assertInstanceOf(Bee::class, $shuffler->shuffle([Queen::create(), Worker::create()]));
     }
 
@@ -29,7 +29,7 @@ class RandomShufflerTest extends TestCase
      */
     public function cannot_shuffle_without_bees(): void
     {
-        $shuffler = new RandomShuffler();
+        $shuffler = new RandomBeeProvider();
         $this->expectException(HiveEmpty::class);
         $shuffler->shuffle([]);
     }
@@ -39,7 +39,7 @@ class RandomShufflerTest extends TestCase
      */
     public function cannot_shuffle_without_living_bees(): void
     {
-        $shuffler = new RandomShuffler();
+        $shuffler = new RandomBeeProvider();
         $bee = Worker::create();
         $this->setPrivateProperty($bee, 'lifespan', 0);
 

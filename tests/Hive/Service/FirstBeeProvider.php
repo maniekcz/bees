@@ -5,9 +5,9 @@ namespace Tests\Hive\Service;
 
 use Hive\Exception\HiveEmpty;
 use Hive\Model\Bee;
-use Hive\Service\Shuffler;
+use Hive\Service\BeeProvider;
 
-class FirstShuffler implements Shuffler
+class FirstBeeProvider implements BeeProvider
 {
     public function shuffle(array $bees): Bee
     {
